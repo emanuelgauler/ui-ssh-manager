@@ -2,9 +2,10 @@
   "name": "ui-ssh-manager",
   "version": "1.0.0",
   "description": "CLI para la administración de antenas Ubiquiti por SSH",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
     "test": "mocha test --exit"
+    , "start": "node src/app.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/emanuelgauler/ui-ssh-manager/issues"
   },
-  "homepage": "https://github.com/emanuelgauler/ui-ssh-manager#readme"
+  "homepage": "https://github.com/emanuelgauler/ui-ssh-manager#readme",
+  "dependencies": {
+    "node-ssh": "^13.1.0"
+  }
 }
