@@ -1,17 +1,18 @@
-const { NodeSSH } = require('node-ssh')
-const ssh = new NodeSSH();
-const USER = process.env.USER;
-const KEYPHRASE = `${process.env.HOME}/.ssh/id_rsa`
-const HOST = process.argv[2] ? process.argv[2] : '192.168.1.1'
+const { NodeSSH }       = require('node-ssh')
+const ssh               = new NodeSSH();
+const USER              = process.env.USER;
+const KEYPHRASE         = `${process.env.HOME}/.ssh/id_rsa`
+const HOST              = process.argv[2] ? process.argv[2] : '192.168.1.1'
+const PASS_TYPE         = process.argv[3] ? process.argv[3] : 'PHRASE'
 
-const PARAMS = {
+const WITH_PARAMS = {
     host: HOST
     , username: USER
-    , privateKeyPath: KEYPHRASE
+    , password: 'ubnt'
 }
 const MAC_PATTERN = /[0-9a-f]{1,2}([\.:-])(?:[0-9a-f]{1,2}\1){4}[0-9a-f]{1,2}/gmi
 
-ssh.connect(PARAMS)
+ssh.connect(WITH_PARAMS)
     .then(async function () {
         console.info(">> success connection");
         try {
@@ -28,5 +29,8 @@ ssh.connect(PARAMS)
             console.log( `>> [SERVER]: ${err}`)
         }
 
+    })
+    .catch( err => {
+        console.log(">> [ERROR]:", err.message )
     })
     .finally( ()=> ssh.dispose() );
